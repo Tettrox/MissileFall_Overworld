@@ -1,0 +1,43 @@
+<!--This is the only thing you'll get here, IE8.-->
+<!DOCTYPE html>
+<!--One English, best English.-->
+<html lang="en">
+	<link rel="stylesheet" href="Stylesheet.css" />
+	<head>
+		<title>MissileFall: Overworld</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Welcome to MissileFall: Overworld.">
+		<meta name="keywords" content="MissileFall,Overworld,MissileFall:Overworld,game,html5,free">
+		<meta name="author" content="Brian James 'Tettrox' Van Craenenbroeck">
+	</head>
+	<body>
+		<canvas id="GameCanvas" class="GameCanvas" width="1000" height="1000">
+			<noscript>
+				Turn JavaScript on. It's 2017, and if you're seeing this, you clearly have a browser with HTML5 support, so what actual excuse do you have for not using JavaScript?
+			</noscript>
+		</canvas>
+		<canvas id="GameMirror" class="GameMirror" width="400" height="200"></canvas>
+		<!--These only have ID tags for readability. Only the SpriteBank ones are used.-->
+		<div id="ResourceBank" style="display: none;">
+			<div id="SpriteBank">
+				<img id="SprPlayer" src="/Sprites/Entities/SprSheetHero.png"></img>
+				<img id="SprSand" src="/Sprites/Tiles/SprSand.png"></img>
+				<img id="SprCactus" src="/Sprites/Tiles/SprCactus.png"></img>
+				<img id="SprTiles" src="/Sprites/Tiles/DuneCowSkull.png"></img>
+			</div>
+			<div id="SoundBank">
+				<div id="SoundEffects">
+					
+				</div>
+				<div id="Music">
+					
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="/Scripts/Globals.js"></script>
+	<script src="/Scripts/Entities.js"></script>
+	<script src="/Scripts/Tiles.js"></script>
+	<script src="/Scripts/WorldMap.js"></script>
+	<script src="/Scripts/GameScript.js" onload="initGame()"></script>
+</html>
