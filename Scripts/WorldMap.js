@@ -59,17 +59,18 @@ function mutateMap()
 	{
 		_DoMutate = Math.floor(Math.random() * _MutateChanceMax);
 		
-		if (_DuMutate + 2 === _MutateChanceMax)
+		if (_DoMutate + 2 === _MutateChanceMax)
 		{
-			_MutateChoice = Math.floor(Math.random() * 3);
+			_MutateChoice = Math.floor(Math.random() * 100);
 			
-			if (_MutateChoice == 1)
+			//This should go from lowest to highest. If it does not operate as such, some elements will never spawn.
+			if (_MutateChoice < 15)
 			{
-				Tiles.push(new TileCactus(TempMapData[i].XLoc, TempMapData[i].YLoc));
-			} else if (_MutateChoice == 2) {
 				Tiles.push(new TileCowSkull(TempMapData[i].XLoc, TempMapData[i].YLoc));
-			} else {
+			} else if (_MutateChoice < 25) {
 				Tiles.push(new TileDune(TempMapData[i].XLoc, TempMapData[i].YLoc));
+			} else if (_MutateChoice < 70) {
+				Tiles.push(new TileCactus(TempMapData[i].XLoc, TempMapData[i].YLoc));
 			}
 		}
 	}
@@ -107,6 +108,7 @@ function loadMap()
 	*/
 }
 
+//Shorthand function for generating a new map.
 function shNewMap()
 {
 	newMap();
