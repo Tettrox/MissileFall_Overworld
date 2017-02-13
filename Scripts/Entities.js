@@ -14,6 +14,9 @@ class MiniEntity
 		this.YVel = 0;
 		this.ClipX = 0;
 		this.ClipY = 0;
+		
+		//Check docs for options.
+		this.LightingMod = "Normal";
 	}
 }
 
@@ -28,11 +31,12 @@ class Entity extends MiniEntity
 		//For information related to animation variables, see docs. Search 'Animation Set Options'.
 		this.MaxAnimationFrames = 0;
 		this.AnimationFrame = 0;
-		this.AnimationSet = 0;
+		this.AnimationSet = [];
 		this.ASLeft = [];
 		this.ASRight = [];
 		this.ASUp = [];
 		this.ASDown = [];
+		this.ASSpecial = [];
 		
 		//This will be set later if the entity needs it. Otherwise, it will be disabled so there is no possibility for an invalid animation to play.
 		this.AnimationTimer = 0;
@@ -41,10 +45,11 @@ class Entity extends MiniEntity
 	doAnimation()
 	{
 		//TODO: Try using a 2D array for this. Might work with the weird way JavaScript does arrays.
-		if (this.AnimationFrame < this.ASRight.length)
+		//TODO: Would performance see a significant increase by assigning arrays to another array and scanning that for points instead of running all these contitionals.
+		if (this.AnimationFrame < this.AnimationSet.length)
 		{
-			this.ClipX = this.ASRight[this.AnimationFrame].XLoc;
-			this.ClipY = this.ASRight[this.AnimationFrame].YLoc;
+			this.ClipX = this.AnimationSet[this.AnimationFrame].XLoc;
+			this.ClipY = this.AnimationSet[this.AnimationFrame].YLoc;
 			this.AnimationFrame++;
 		} else {
 			this.AnimationFrame = 0;
@@ -65,11 +70,11 @@ class Player extends Entity
 		this.EntitySpeed = 2;
 		
 		//Set all animation variables.
-		this.AnimationSet = 2;
 		this.ASLeft = [];
 		this.ASRight = [new Point(19, 33), new Point(35, 32), new Point(50, 32)];
 		this.ASUp = [];
 		this.ASDown = [];
+		this.AnimationSet = this.ASRight;
 		this.AnimationTimer = setInterval(this.doAnimation.bind(this), 88);
 		
 		this.XLoc = document.getElementById("GameCanvas").width / 2 - this.EntityWidth;
