@@ -16,6 +16,7 @@ class MiniEntity
 		this.ClipY = 0;
 		
 		//Check docs for options.
+		this.LightDefault = "Normal";
 		this.LightingMod = "Normal";
 	}
 }
@@ -76,6 +77,7 @@ class Player extends Entity
 		this.ASDown = [];
 		this.AnimationSet = this.ASRight;
 		this.AnimationTimer = setInterval(this.doAnimation.bind(this), 88);
+		this.LightingMod = "Light";
 		
 		this.XLoc = document.getElementById("GameCanvas").width / 2 - this.EntityWidth;
 		this.YLoc = document.getElementById("GameCanvas").height / 2 - this.EntityHeight;
