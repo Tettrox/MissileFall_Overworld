@@ -10,6 +10,7 @@ html
 	align-content: center;
 	border: 2px solid red;
 	z-index: -120;
+	image-rendering: pixelated;
 }
 .GameMirror
 {
