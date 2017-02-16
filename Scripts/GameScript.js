@@ -17,6 +17,8 @@ var CameraPixelData = 0;
 var GameState = 0;
 var GameLoopTmr = 0;
 
+var _LightSrc;
+
 //Checks collision between all entities in the Entities array.
 function checkEntityCollision()
 {
@@ -63,8 +65,8 @@ function moveEntities()
 		Entities[i].YLoc += Entities[i].YVel;
 	}
 	
-	CameraArea[0] = Entities[findPlayer()].XLoc - 20;
-	CameraArea[1] = Entities[findPlayer()].YLoc - 20;
+	CameraArea[0] = Entities[findPlayer()].XLoc - 100;
+	CameraArea[1] = Entities[findPlayer()].YLoc - 100;
 }
 
 //Draws all entities in Entity array to the screen.
@@ -73,7 +75,22 @@ function drawEntities()
 	GameCanvasCtx.imageSmoothingEnabled = false;
 	for (var i = 0; i < Entities.length; i++)
 	{
+		if (Entities[i].LightingMod == "Light")
+		{
+			//GameCanvasCtx.globalCompositeOperation = "source-over";
+			_LightSrc = GameCanvasCtx.createRadialGradient(Entities[i].XLoc, Entities[i].YLoc, 16, Entities[i].XLoc, Entities[i].YLoc, 24);
+			_LightSrc.addColorStop(0.5, "yellow");
+			GameCanvasCtx.globalAlpha = Math.random() * 0.8;
+			GameCanvasCtx.beginPath();
+			GameCanvasCtx.fillStyle = _LightSrc;
+			GameCanvasCtx.arc(Entities[i].XLoc + (Entities[i].EntityWidth / 2), Entities[i].YLoc + Entities[i].EntityHeight, 32, 32, 64);
+			GameCanvasCtx.fill();
+			GameCanvasCtx.closePath();
+			GameCanvasCtx.globalAlpha = 1.0;
+		}
+		//GameCanvasCtx.fillStyle = "#000000";
 		GameCanvasCtx.drawImage(Entities[i].EntitySpr, Entities[i].ClipX, Entities[i].ClipY, Entities[i].EntityWidth, Entities[i].EntityHeight, Entities[i].XLoc, Entities[i].YLoc, Entities[i].EntityWidth, Entities[i].EntityHeight);
+		//GameCanvasCtx.globalCompositeOperation = "normal";
 	}
 }
 
@@ -89,17 +106,22 @@ function drawTiles()
 //Main game loop.
 function GameLoop()
 {
-	GameCanvasCtx.fillStyle = "#FF0000";
-	GameCanvasCtx.fillRect(0, 0, 40, 40);
+	//GameCanvasCtx.fillStyle = "#FF0000";
+	//GameCanvasCtx.fillRect(0, 0, 40, 40);
 	CameraPixelData = GameCanvasCtx.getImageData(CameraArea[0], CameraArea[1], GameCanvas.width, GameCanvas.height);
 	GameCanvasCtx.putImageData(CameraPixelData, 0, 0);
 	
-	GameCanvasCtx.fillStyle = "#FF0000";
-	GameCanvasCtx.fillRect(0, 0, 40000, 40000);
+	//GameCanvasCtx.fillStyle = "#FF0000";
+	//GameCanvasCtx.fillRect(0, 0, 40000, 40000);
 	var _Background = GameCanvasCtx.createPattern(document.getElementById("SprSand"), "repeat");
 	GameCanvasCtx.fillStyle = _Background;
 	GameCanvasCtx.fillRect(0, 0, 30000, 30000);
-	GameCanvasCtx.fillStyle = "#FF0000";
+	//GameCanvasCtx.fillStyle = "#FF0000";
+	
+	GameCanvasCtx.fillStyle = "#000000";
+	GameCanvasCtx.globalAlpha = 0.5;
+	GameCanvasCtx.fillRect(0, 0, 40000, 40000);
+	GameCanvasCtx.globalAlpha = 1.0;
 	
 	moveEntities();
 	checkGlobalCollision();
