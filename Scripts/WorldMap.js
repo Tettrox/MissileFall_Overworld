@@ -74,6 +74,9 @@ function mutateMap()
 			}
 		}
 	}
+	
+	//Clear TempMapData.
+	TempMapData = [];
 }
 
 function loadMap()
