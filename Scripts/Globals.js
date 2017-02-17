@@ -1,9 +1,12 @@
 GameCanvas = document.getElementById("GameCanvas");
 GameCanvasCtx = GameCanvas.getContext('2d');
+GameMirror = document.getElementById("GameMirror");
 GameMirrorCtx = document.getElementById("GameMirror").getContext('2d');
 Entities = [];
 Tiles = [];
 Structures = [];
+MouseX = 0;
+MouseY = 0;
 
 //Debug variables.
 var lastDate = new Date;
