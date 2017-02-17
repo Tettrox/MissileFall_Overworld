@@ -106,17 +106,12 @@ function drawTiles()
 //Main game loop.
 function GameLoop()
 {
-	//GameCanvasCtx.fillStyle = "#FF0000";
-	//GameCanvasCtx.fillRect(0, 0, 40, 40);
 	CameraPixelData = GameCanvasCtx.getImageData(CameraArea[0], CameraArea[1], GameCanvas.width, GameCanvas.height);
 	GameCanvasCtx.putImageData(CameraPixelData, 0, 0);
 	
-	//GameCanvasCtx.fillStyle = "#FF0000";
-	//GameCanvasCtx.fillRect(0, 0, 40000, 40000);
 	var _Background = GameCanvasCtx.createPattern(document.getElementById("SprSand"), "repeat");
 	GameCanvasCtx.fillStyle = _Background;
 	GameCanvasCtx.fillRect(0, 0, 30000, 30000);
-	//GameCanvasCtx.fillStyle = "#FF0000";
 	
 	GameCanvasCtx.fillStyle = "#000000";
 	GameCanvasCtx.globalAlpha = 0.5;
@@ -182,4 +177,10 @@ function initGame()
 	document.addEventListener("keydown", keydownInput);
 	document.addEventListener("keyup", keyupInput);
 	Entities.push(new Player());
+	
+	GameMirror.addEventListener("mousemove", function (e)
+	{
+		MouseX = e.clientX - GameMirror.getBoundingClientRect().left;
+		MouseY = e.clientY - GameMirror.getBoundingClientRect().top;
+	});
 }
