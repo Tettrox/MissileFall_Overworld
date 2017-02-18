@@ -30,7 +30,6 @@ class Entity extends MiniEntity
 		this.EntityTag = "Entity";
 		
 		//For information related to animation variables, see docs. Search 'Animation Set Options'.
-		this.MaxAnimationFrames = 0;
 		this.AnimationFrame = 0;
 		this.AnimationSet = [];
 		this.ASLeft = [];
