@@ -17,6 +17,7 @@ var CameraPixelData = 0;
 var GameState = 0;
 var GameLoopTmr = 0;
 
+//Temporarily moved from drawEntities to test for memory leaks.
 var _LightSrc;
 
 //Checks collision between all entities in the Entities array.
@@ -75,6 +76,7 @@ function drawEntities()
 	GameCanvasCtx.imageSmoothingEnabled = false;
 	for (var i = 0; i < Entities.length; i++)
 	{
+		//Check if the entity should be emmitting light or not.
 		if (Entities[i].LightingMod == "Light")
 		{
 			//GameCanvasCtx.globalCompositeOperation = "source-over";
@@ -94,6 +96,7 @@ function drawEntities()
 	}
 }
 
+//Draw all tile data in the Tiles array.
 function drawTiles()
 {
 	GameCanvasCtx.imageSmoothingEnabled = false;
@@ -122,6 +125,12 @@ function GameLoop()
 	checkGlobalCollision();
 	drawEntities();
 	drawTiles();
+	
+	GameCanvasCtx.fillStyle = "#000000";
+	GameCanvasCtx.globalAlpha = 0.5;
+	GameCanvasCtx.fillRect(0, 0, 40000, 40000);
+	GameCanvasCtx.globalAlpha = 1.0;
+	
 	CameraPixelData = GameCanvasCtx.getImageData(CameraArea[0], CameraArea[1], 400, 400);
 	//GameCanvasCtx.putImageData(CameraPixelData, 0, 0);
 	
@@ -183,4 +192,7 @@ function initGame()
 		MouseX = e.clientX - GameMirror.getBoundingClientRect().left;
 		MouseY = e.clientY - GameMirror.getBoundingClientRect().top;
 	});
+	
+	//Only for testing.
+	shNewMap();
 }
